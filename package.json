@@ -1,0 +1,17 @@
+{
+  "name": "data-science-study-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "58 lessons, 116 practice questions and a 100-mark mock for Data Science Weeks 1\u20135",
+  "scripts": {
+    "test": "node verify.mjs",
+    "compile": "node compile.mjs"
+  },
+  "devDependencies": {
+    "marked": "17.0.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
