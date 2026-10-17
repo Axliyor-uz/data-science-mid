@@ -1,44 +1,445 @@
 [
   {
-    "id": "1", "week": "1", "title": "Rows, joins and pass rates", "subtitle": "Connect two tables without changing what a row means.", "duration": "About 2 hours", "filename": "Lab_01_Rows_Joins_Missingness_Student(3).ipynb", "setup": [0,2], "submission": [],
+    "id": "1",
+    "week": "1",
+    "title": "Connecting two tables, one step at a time",
+    "subtitle": "Connect two tables without changing what a row means.",
+    "duration": "About 2 hours",
+    "filename": "Lab_01_Rows_Joins_Missingness_Student(3).ipynb",
+    "setup": [
+      0,
+      2
+    ],
+    "submission": [],
     "dataNote": "This notebook loads students.csv and enrolments.csv from a local data folder, or from the instructor's GitHub URL if they are not present. Those CSVs are not bundled here. Run the notebook with internet access or supply the course files in data/.",
     "submitNote": "Complete the four small TODOs and explanations, write the 120–160 word final note, keep outputs visible, then restart and run all. Follow the current course submission instructions; the notebook's printed 23:59 time does not identify a date.",
     "sections": [
-      {"id":"part-1","title":"Look at the student table","questions":"Part 1 · TODO 1 and three explanations","cells":[3,7],"lessons":["2.4","2.5"],"pages":"Week 1: rows and measurement, PDF pp. 30–39","connection":"The lecture defines a row and an identifier. Here you check that students has one row per person and choose the matching table.","task":"Inspect columns and ID uniqueness. Choose the one-student table for TODO 1. Name one column's measurement type.","evidence":"Record the actual student count, uniqueness result and a specific column example.","trap":"A numerical-looking ID is a label, not a measurement to average."},
-      {"id":"part-2","title":"Compare students and registrations","questions":"Part 2 · three explanations","cells":[8,10],"lessons":["2.4","2.8"],"pages":"Week 1: rows, keys and joins, PDF pp. 32–39, 42–53","connection":"The lecture distinguishes people from repeated observations. This table repeats student IDs because each row is a course registration.","task":"Compare the two tables. Predict whether student_id is unique in enrolments and choose which table belongs on the left.","evidence":"Cite enrolment row count and distinct student count. Explain why the counts differ.","trap":"Do not delete valid registrations just because an ID repeats."},
-      {"id":"part-3","title":"Join and check the tables","questions":"Part 3 · TODO 2 and merge checks","cells":[11,14],"lessons":["2.8","2.9","4.2"],"pages":"Week 1: joins, PDF pp. 42–53; Week 3 inventory is a later connection","connection":"many_to_one is the lecture's key rule in code. Unique student keys on the right prevent registrations from multiplying.","task":"Predict the joined row count. Complete TODO 2, run the merge and inspect both assertions.","evidence":"Give before/after row counts, the final row meaning, and what duplicate right-side keys could cause.","trap":"A passed cardinality check does not prove all source values are accurate."},
-      {"id":"part-4","title":"Explain pass rates by study mode","questions":"Part 4 · TODO 3, chart and four explanations","cells":[15,18],"lessons":["2.9","7.2","7.4"],"pages":"Week 1 Lab 1 summary; Week 5 rates and unknown outcomes, PDF pp. 5–24","connection":"The mean of complete 0/1 outcomes is a rate. The denominator is course registrations, linking directly to the later lecture on counts and rates.","task":"Choose the study-mode column in TODO 3, inspect the table and chart, and state the denominator in words.","evidence":"Quote both group sizes and pass rates from your output, then give a noncausal interpretation.","trap":"A registration pass rate is not automatically the percentage of students passing."},
-      {"id":"part-5","title":"Compare programmes carefully","questions":"Part 5 · TODO 4","cells":[19,20],"lessons":["2.9","2.3","7.8","7.9"],"pages":"Week 1: claim ladder, PDF pp. 22–29; Week 5 course mix, PDF pp. 38–51","connection":"Changing groupby changes the comparison, not its causal strength. Course mix and preparation can still differ between programmes.","task":"Change the grouping field to programme. Run the summary and use its table or a chart to describe differences.","evidence":"Name the groups and their denominators. Give a plausible alternative explanation for the highest rate.","trap":"Highest recorded pass rate does not prove best teaching."},
-      {"id":"part-6","title":"Write a cautious final explanation","questions":"Final thinking task and peer check","cells":[21,22],"lessons":["2.2","2.3","2.10","7.9"],"pages":"Week 1: framing, claims, evidence and reproducibility","connection":"The lecture's claim ladder becomes a written answer: report the comparison, explain its limits and identify a useful next check.","task":"Write 120–160 words, complete the peer check and restart/run all before saving.","evidence":"Use your challenge table, identify the row unit and explain what evidence would be needed for a teaching-effect claim.","trap":"Do not turn a descriptive group difference into a policy recommendation without discussing the missing causal evidence."}
+      {
+        "id": "part-1",
+        "title": "Look at the student table",
+        "questions": "Part 1 · TODO 1 and three explanations",
+        "cells": [
+          3,
+          7
+        ],
+        "lessons": [
+          "2.4",
+          "2.5"
+        ],
+        "pages": "Week 1: rows and measurement, PDF pp. 30–39",
+        "connection": "The lecture defines a row and an identifier. Here you check that students has one row per person and choose the matching table.",
+        "task": "Inspect columns and ID uniqueness. Choose the one-student table for TODO 1. Name one column's measurement type.",
+        "evidence": "Record the actual student count, uniqueness result and a specific column example.",
+        "trap": "A numerical-looking ID is a label, not a measurement to average."
+      },
+      {
+        "id": "part-2",
+        "title": "Compare students and registrations",
+        "questions": "Part 2 · three explanations",
+        "cells": [
+          8,
+          10
+        ],
+        "lessons": [
+          "2.4",
+          "2.8"
+        ],
+        "pages": "Week 1: rows, keys and joins, PDF pp. 32–39, 42–53",
+        "connection": "The lecture distinguishes people from repeated observations. This table repeats student IDs because each row is a course registration.",
+        "task": "Compare the two tables. Predict whether student_id is unique in enrolments and choose which table belongs on the left.",
+        "evidence": "Cite enrolment row count and distinct student count. Explain why the counts differ.",
+        "trap": "Do not delete valid registrations just because an ID repeats."
+      },
+      {
+        "id": "part-3",
+        "title": "Join and check the tables",
+        "questions": "Part 3 · TODO 2 and merge checks",
+        "cells": [
+          11,
+          14
+        ],
+        "lessons": [
+          "2.8",
+          "2.9",
+          "4.2"
+        ],
+        "pages": "Week 1: joins, PDF pp. 42–53; Week 3 inventory is a later connection",
+        "connection": "many_to_one is the lecture's key rule in code. Unique student keys on the right prevent registrations from multiplying.",
+        "task": "Predict the joined row count. Complete TODO 2, run the merge and inspect both assertions.",
+        "evidence": "Give before/after row counts, the final row meaning, and what duplicate right-side keys could cause.",
+        "trap": "A passed cardinality check does not prove all source values are accurate."
+      },
+      {
+        "id": "part-4",
+        "title": "Explain pass rates by study mode",
+        "questions": "Part 4 · TODO 3, chart and four explanations",
+        "cells": [
+          15,
+          18
+        ],
+        "lessons": [
+          "2.9",
+          "7.2",
+          "7.4"
+        ],
+        "pages": "Week 1 Lab 1 summary; Week 5 rates and unknown outcomes, PDF pp. 5–24",
+        "connection": "The mean of complete 0/1 outcomes is a rate. The denominator is course registrations, linking directly to the later lecture on counts and rates.",
+        "task": "Choose the study-mode column in TODO 3, inspect the table and chart, and state the denominator in words.",
+        "evidence": "Quote both group sizes and pass rates from your output, then give a noncausal interpretation.",
+        "trap": "A registration pass rate is not automatically the percentage of students passing."
+      },
+      {
+        "id": "part-5",
+        "title": "Compare programmes carefully",
+        "questions": "Part 5 · TODO 4",
+        "cells": [
+          19,
+          20
+        ],
+        "lessons": [
+          "2.9",
+          "2.3",
+          "7.8",
+          "7.9"
+        ],
+        "pages": "Week 1: claim ladder, PDF pp. 22–29; Week 5 course mix, PDF pp. 38–51",
+        "connection": "Changing groupby changes the comparison, not its causal strength. Course mix and preparation can still differ between programmes.",
+        "task": "Change the grouping field to programme. Run the summary and use its table or a chart to describe differences.",
+        "evidence": "Name the groups and their denominators. Give a plausible alternative explanation for the highest rate.",
+        "trap": "Highest recorded pass rate does not prove best teaching."
+      },
+      {
+        "id": "part-6",
+        "title": "Write a cautious final explanation",
+        "questions": "Final thinking task and peer check",
+        "cells": [
+          21,
+          22
+        ],
+        "lessons": [
+          "2.2",
+          "2.3",
+          "2.10",
+          "7.9"
+        ],
+        "pages": "Week 1: framing, claims, evidence and reproducibility",
+        "connection": "The lecture's claim ladder becomes a written answer: report the comparison, explain its limits and identify a useful next check.",
+        "task": "Write 120–160 words, complete the peer check and restart/run all before saving.",
+        "evidence": "Use your challenge table, identify the row unit and explain what evidence would be needed for a teaching-effect claim.",
+        "trap": "Do not turn a descriptive group difference into a policy recommendation without discussing the missing causal evidence."
+      }
     ]
   },
   {
-    "id": "2", "week": "2", "title": "What an average hides", "subtitle": "Use your own case to calculate, plot and explain the data.", "duration": "About 2 hours", "filename": "Lab_02_Describing_Data_Student(2).ipynb", "setup": [0,1], "submission": [33,33],
+    "id": "2",
+    "week": "2",
+    "title": "What an average hides",
+    "subtitle": "Use your own case to calculate, plot and explain the data.",
+    "duration": "About 2 hours",
+    "filename": "Lab_02_Describing_Data_Student(2).ipynb",
+    "setup": [
+      0,
+      1
+    ],
+    "submission": [
+      33,
+      33
+    ],
     "dataNote": "The notebook generates 240 synthetic students from your student ID. It needs no dataset download. Enter your own 6–12 digit ID and keep it unchanged. The site does not run the notebook or invent your case-specific results.",
     "submitNote": "Answer 1A–8B, include the hand calculations and approximately 150-word recommendation, keep plots and outputs, and save as STUDENTID_Lab2_FDS.ipynb after restarting and running all. Use the current course submission channel.",
     "sections": [
-      {"id":"part-1","title":"Who and what are being described?","questions":"1A–1C","cells":[2,4],"lessons":["2.4","2.5","3.1","4.5"],"pages":"Week 2: measurement and summary context; Week 1 rows and types","connection":"The lecture's summary context becomes a denominator check: all student rows for a response rate, recorded ratings for an observed mean.","task":"Identify the row unit, count recorded and missing satisfaction, and compare category labels with measurements.","evidence":"Use your valid n, missing count and response table. Explain why missing ratings are not zero.","trap":"A mean of arbitrary record IDs or programme codes does not describe a meaningful quantity."},
-      {"id":"part-2","title":"Calculate eight scores by hand","questions":"2A–2C","cells":[5,9],"lessons":["3.2","3.3","3.4"],"pages":"Week 2: centre and spread, PDF pp. 10–30","connection":"The mean and SD formulas in the lecture are applied to your eight generated scores. The code checks your working after you try it.","task":"Find sum, mean, median, deviations, squared-deviation sum, sample variance and sample SD before revealing the check.","evidence":"Show the working and units. Compare sample and population-style SD and explain their divisors.","trap":"Variance has squared units; SD has the original units. pandas and NumPy defaults can differ."},
-      {"id":"part-3","title":"Quartiles and a changed maximum","questions":"3A–3D","cells":[10,13],"lessons":["3.5","3.6","4.10"],"pages":"Week 2: quartiles, range and sensitivity, PDF pp. 10–30","connection":"The lecture's robust summaries are tested by changing one extreme value. The lab also makes the quartile convention explicit.","task":"Use median-of-halves for the eight scores, predict the effect of multiplying the maximum by ten, then compare with the output.","evidence":"Report the five-number summary and IQR, two numerical changes, and why the hand/software quartiles may differ.","trap":"A stable median in this example does not make the median universally best."},
-      {"id":"part-4","title":"Read shapes and compare bins","questions":"4A–4D","cells":[14,16],"lessons":["3.2","3.7","3.8","7.5"],"pages":"Week 2: shape, bins and normal approximation, PDF pp. 33–43","connection":"Mean, median and skewness are clues; the four plots show what they miss. Changing bins changes the picture, not the data.","task":"Describe each distribution, compare mean and median, try the supplied bin settings and evaluate the normality claim.","evidence":"Use plot features such as tails, peaks and gaps, plus the actual centre values from your case.","trap":"Near-zero skewness or similar mean and median does not establish a normal distribution."},
-      {"id":"part-5","title":"Boxplots and hidden groups","questions":"5A–5D","cells":[17,22],"lessons":["3.6","3.7","4.10","7.9"],"pages":"Week 2: boxplots and grouped summaries; Week 3 outliers is a later connection","connection":"The lecture's fences and whiskers become record-level checks. Programme summaries and two equal-mean/SD classes show why the whole shape matters.","task":"Calculate a fence, identify a whisker and flagged record, compare programme distributions, then describe the two small classes.","evidence":"Cite an ID, minutes, quartiles, a whisker endpoint, and group mean/SD values. Explain a better support plan.","trap":"Do not delete a high-use student only because a fence flags them, or treat a group difference as proof of a cause."},
-      {"id":"part-6","title":"Test the normal-model approximation","questions":"6A–6C","cells":[23,25],"lessons":["3.7","3.8"],"pages":"Week 2: normal approximation, PDF pp. 33–43","connection":"The 68–95–99.7 rule is compared with observed proportions. It is an approximate model statement, not a guaranteed sample result.","task":"Calculate your one-SD interval, report its observed share, and judge which distribution is the most plausible normal candidate.","evidence":"Use both the shapes and the proportion table rather than a single number near 95%.","trap":"A proportion close to a model percentage does not prove the model is correct."},
-      {"id":"part-7","title":"Z-scores and the reference group","questions":"7A–7E","cells":[26,29],"lessons":["3.9","5.3","5.4"],"pages":"Week 2: z-score, rank and specification, PDF pp. 45–50; Week 4 scaling is a later connection","connection":"The same raw score gets different z-scores when the reference changes. This lab uses sample SD (ddof=1); the Week 4 prediction scaler uses training-only population-style SD (ddof=0).",
-       "task":"Predict whether z changes, show a calculation, explain the standardised column, compare distance with percentile rank, and apply the bottle specification.","evidence":"Name the reference group and SD convention. Use your table, the extreme practice-time value, and the stated 94–106 mL acceptance interval.","trap":"A z-score is not automatically a percentile or an acceptance rule. Do not confuse this descriptive reference calculation with fitting a prediction scaler on test data."},
-      {"id":"part-8","title":"Choose a summary for the decision","questions":"8A–8B","cells":[30,32],"lessons":["3.1","3.2","3.10"],"pages":"Week 2: typical use versus total workload, PDF p. 58","connection":"The lecture's question-first approach decides which summary to use: a typical student and total observed workload are different requests.","task":"Write an approximately 150-word note for your assigned request and predict the effect of doubling the highest-use value.","evidence":"Include case code, population, valid n, units, centre/spread, two numbers, shape and a limitation. Also address the alternative request.","trap":"The observed total is not automatically a forecast for another week. Do not multiply a median by n and call it the exact total."}
+      {
+        "id": "part-1",
+        "title": "Who and what are being described?",
+        "questions": "1A–1C",
+        "cells": [
+          2,
+          4
+        ],
+        "lessons": [
+          "2.4",
+          "2.5",
+          "3.1",
+          "4.5"
+        ],
+        "pages": "Week 2: measurement and summary context; Week 1 rows and types",
+        "connection": "The lecture's summary context becomes a denominator check: all student rows for a response rate, recorded ratings for an observed mean.",
+        "task": "Identify the row unit, count recorded and missing satisfaction, and compare category labels with measurements.",
+        "evidence": "Use your valid n, missing count and response table. Explain why missing ratings are not zero.",
+        "trap": "A mean of arbitrary record IDs or programme codes does not describe a meaningful quantity."
+      },
+      {
+        "id": "part-2",
+        "title": "Calculate eight scores by hand",
+        "questions": "2A–2C",
+        "cells": [
+          5,
+          9
+        ],
+        "lessons": [
+          "3.2",
+          "3.3",
+          "3.4"
+        ],
+        "pages": "Week 2: centre and spread, PDF pp. 10–30",
+        "connection": "The mean and SD formulas in the lecture are applied to your eight generated scores. The code checks your working after you try it.",
+        "task": "Find sum, mean, median, deviations, squared-deviation sum, sample variance and sample SD before revealing the check.",
+        "evidence": "Show the working and units. Compare sample and population-style SD and explain their divisors.",
+        "trap": "Variance has squared units; SD has the original units. pandas and NumPy defaults can differ."
+      },
+      {
+        "id": "part-3",
+        "title": "Quartiles and a changed maximum",
+        "questions": "3A–3D",
+        "cells": [
+          10,
+          13
+        ],
+        "lessons": [
+          "3.5",
+          "3.6",
+          "4.10"
+        ],
+        "pages": "Week 2: quartiles, range and sensitivity, PDF pp. 10–30",
+        "connection": "The lecture's robust summaries are tested by changing one extreme value. The lab also makes the quartile convention explicit.",
+        "task": "Use median-of-halves for the eight scores, predict the effect of multiplying the maximum by ten, then compare with the output.",
+        "evidence": "Report the five-number summary and IQR, two numerical changes, and why the hand/software quartiles may differ.",
+        "trap": "A stable median in this example does not make the median universally best."
+      },
+      {
+        "id": "part-4",
+        "title": "Read shapes and compare bins",
+        "questions": "4A–4D",
+        "cells": [
+          14,
+          16
+        ],
+        "lessons": [
+          "3.2",
+          "3.7",
+          "3.8",
+          "7.5"
+        ],
+        "pages": "Week 2: shape, bins and normal approximation, PDF pp. 33–43",
+        "connection": "Mean, median and skewness are clues; the four plots show what they miss. Changing bins changes the picture, not the data.",
+        "task": "Describe each distribution, compare mean and median, try the supplied bin settings and evaluate the normality claim.",
+        "evidence": "Use plot features such as tails, peaks and gaps, plus the actual centre values from your case.",
+        "trap": "Near-zero skewness or similar mean and median does not establish a normal distribution."
+      },
+      {
+        "id": "part-5",
+        "title": "Boxplots and hidden groups",
+        "questions": "5A–5D",
+        "cells": [
+          17,
+          22
+        ],
+        "lessons": [
+          "3.6",
+          "3.7",
+          "4.10",
+          "7.9"
+        ],
+        "pages": "Week 2: boxplots and grouped summaries; Week 3 outliers is a later connection",
+        "connection": "The lecture's fences and whiskers become record-level checks. Programme summaries and two equal-mean/SD classes show why the whole shape matters.",
+        "task": "Calculate a fence, identify a whisker and flagged record, compare programme distributions, then describe the two small classes.",
+        "evidence": "Cite an ID, minutes, quartiles, a whisker endpoint, and group mean/SD values. Explain a better support plan.",
+        "trap": "Do not delete a high-use student only because a fence flags them, or treat a group difference as proof of a cause."
+      },
+      {
+        "id": "part-6",
+        "title": "Test the normal-model approximation",
+        "questions": "6A–6C",
+        "cells": [
+          23,
+          25
+        ],
+        "lessons": [
+          "3.7",
+          "3.8"
+        ],
+        "pages": "Week 2: normal approximation, PDF pp. 33–43",
+        "connection": "The 68–95–99.7 rule is compared with observed proportions. It is an approximate model statement, not a guaranteed sample result.",
+        "task": "Calculate your one-SD interval, report its observed share, and judge which distribution is the most plausible normal candidate.",
+        "evidence": "Use both the shapes and the proportion table rather than a single number near 95%.",
+        "trap": "A proportion close to a model percentage does not prove the model is correct."
+      },
+      {
+        "id": "part-7",
+        "title": "Z-scores and the reference group",
+        "questions": "7A–7E",
+        "cells": [
+          26,
+          29
+        ],
+        "lessons": [
+          "3.9",
+          "5.3",
+          "5.4"
+        ],
+        "pages": "Week 2: z-score, rank and specification, PDF pp. 45–50; Week 4 scaling is a later connection",
+        "connection": "The same raw score gets different z-scores when the reference changes. This lab uses sample SD (ddof=1); the Week 4 prediction scaler uses training-only population-style SD (ddof=0).",
+        "task": "Predict whether z changes, show a calculation, explain the standardised column, compare distance with percentile rank, and apply the bottle specification.",
+        "evidence": "Name the reference group and SD convention. Use your table, the extreme practice-time value, and the stated 94–106 mL acceptance interval.",
+        "trap": "A z-score is not automatically a percentile or an acceptance rule. Do not confuse this descriptive reference calculation with fitting a prediction scaler on test data."
+      },
+      {
+        "id": "part-8",
+        "title": "Choose a summary for the decision",
+        "questions": "8A–8B",
+        "cells": [
+          30,
+          32
+        ],
+        "lessons": [
+          "3.1",
+          "3.2",
+          "3.10"
+        ],
+        "pages": "Week 2: typical use versus total workload, PDF p. 58",
+        "connection": "The lecture's question-first approach decides which summary to use: a typical student and total observed workload are different requests.",
+        "task": "Write an approximately 150-word note for your assigned request and predict the effect of doubling the highest-use value.",
+        "evidence": "Include case code, population, valid n, units, centre/spread, two numbers, shape and a limitation. Also address the alternative request.",
+        "trap": "The observed total is not automatically a forecast for another week. Do not multiply a median by n and call it the exact total."
+      }
     ]
   },
   {
-    "id": "3", "week": "3", "title": "Data cleaning and quality", "subtitle": "Make supported cleaning choices and explain what remains uncertain.", "duration": "110 minutes + 10-minute check", "filename": "Copy of Lab_03_Data_Cleaning_and_Quality_Student(1).ipynb", "setup": [0,2], "submission": [28,29],
+    "id": "3",
+    "week": "3",
+    "title": "Data Cleaning and Quality",
+    "subtitle": "Make supported cleaning choices and explain what remains uncertain.",
+    "duration": "110 minutes + 10-minute check",
+    "filename": "Copy of Lab_03_Data_Cleaning_and_Quality_Student(1).ipynb",
+    "setup": [
+      0,
+      2
+    ],
+    "submission": [
+      28,
+      29
+    ],
     "dataNote": "This notebook generates a fictional 12-student registry, a separate 30-person survey and a separate verified withdrawal example. They are different populations. The study copy resets identity fields to placeholders and clears outputs; enter your own ID, name and class before running.",
     "submitNote": "Complete Q1–Q10 and the Q7a table, return to a defensible final policy, rerun and pass checks, and keep unresolved scores missing. Submit the completed notebook plus its generated ZIP. The ZIP includes registry/log/raw CSV files but does not include the notebook.",
     "sections": [
-      {"id":"part-1","title":"Purpose, dictionary and inventory","questions":"Q1–Q2 · 15 points","cells":[3,6],"lessons":["4.1","4.2","4.3","4.5"],"pages":"Week 3: dictionary and quality, PDF pp. 6–15","connection":"The six quality dimensions are applied to a concrete task. The dictionary decides the score scale, date order and allowed programme meanings.","task":"Inspect rows, distinct students, roster coverage and blanks. Explain each quality dimension and the required conversions.","evidence":"Use actual counts and fields. Where accuracy or timeliness cannot be diagnosed, name the source check needed.","trap":"Here a verified percentage representation is stored as points out of 100. Do not automatically divide it by 100."},
-      {"id":"part-2","title":"Choose actions from evidence","questions":"Q3–Q4 · 25 points","cells":[7,11],"lessons":["4.4","4.10","4.11","2.4"],"pages":"Week 3: repeated records, PDF pp. 16–20","connection":"The lecture distinguishes copies, corrections and repeated events. The evidence packet supports removing R13, retaining R14 over R02, and flagging an invalid age value.","task":"Write your decision plan and predict counts before running. Compare flag_value with drop_student, then restore the final policy.","evidence":"Cite record IDs, source verification, final row and missing-score counts, and which usable score is lost under row deletion.","trap":"Newer is not automatically authoritative. A weekly table would need a different key and retain distinct weeks."},
-      {"id":"part-3","title":"Who answered the survey?","questions":"Q5–Q6 · 20 points","cells":[12,16],"lessons":["4.5","4.6","4.7","2.6"],"pages":"Week 3: missingness and response mechanisms, PDF pp. 23–39","connection":"The lecture connects nonresponse with representation. The survey separates group invitation shares from reply shares and asks what MCAR/MAR/MNAR mean.","task":"Predict representation, calculate group missing fractions, report the observed mean and match the three hypothetical mechanisms.","evidence":"Use your actual reply counts and denominators. For MAR given group, explain independence from satisfaction within each group.","trap":"Different observed response rates do not prove MAR. The survey is separate from the entry-score registry."},
-      {"id":"part-4","title":"Missing-value choices and sensitivity","questions":"Q7a–Q7b · 15 points","cells":[17,19],"lessons":["4.8","4.9","3.3"],"pages":"Week 3: missing-data responses and sensitivity, PDF pp. 23–39","connection":"The lecture separates recovered observations from assumed replacements. The mean-fill demonstration and sensitivity table show different consequences of assumptions.","task":"Complete the four-response table. Compare mean, SD and observed count before/after filling, then interpret the target decision under alternative missing means.","evidence":"Quote two sensitivity rows with different decisions, the smallest/largest all-student means and the unchanged number of genuinely observed answers.","trap":"The demonstration does not fill your final registry. A sensitivity scenario is not a recovered response."},
-      {"id":"part-5","title":"Flags, validity and who is counted","questions":"Q8 · 10 points","cells":[20,22],"lessons":["3.6","4.10","7.2"],"pages":"Week 3: unusual values, PDF pp. 40–44","connection":"An IQR flag describes unusualness, while the dictionary and source establish different evidence. Deleting verified older students changes the population behind a rate.","task":"Compare age 220 with the verified older age, then interpret the separate withdrawal example before and after excluding older students.","evidence":"Use review limits and verification, then quote both withdrawal rates with their counts and denominators.","trap":"Lowering a reported rate by excluding valid students does not improve their underlying outcomes."},
-      {"id":"part-6","title":"Audit, report and transfer","questions":"Q9–Q10 · 15 points","cells":[23,27],"lessons":["4.2","4.11","2.10","2.3"],"pages":"Week 3: assertions, logs and reporting, PDF pp. 46–55","connection":"The lecture's audit trail becomes a final report. Structural checks verify stated rules, while source accuracy and broader claims still need separate evidence.","task":"Run final checks. Write the 100–150 word report and 60–100 word answer to your generated challenge, using your own version.","evidence":"Include row counts, mean in points, valid n, missing count, two log entries, and separate missingness/accuracy limitations.","trap":"All checks passing does not prove every score matches the actual exam. Use the displayed seed-dependent challenge, not a different student's case."}
+      {
+        "id": "part-1",
+        "title": "Purpose, dictionary and inventory",
+        "questions": "Q1–Q2 · 15 points",
+        "cells": [
+          3,
+          6
+        ],
+        "lessons": [
+          "4.1",
+          "4.2",
+          "4.3",
+          "4.5"
+        ],
+        "pages": "Week 3: dictionary and quality, PDF pp. 6–15",
+        "connection": "The six quality dimensions are applied to a concrete task. The dictionary decides the score scale, date order and allowed programme meanings.",
+        "task": "Inspect rows, distinct students, roster coverage and blanks. Explain each quality dimension and the required conversions.",
+        "evidence": "Use actual counts and fields. Where accuracy or timeliness cannot be diagnosed, name the source check needed.",
+        "trap": "Here a verified percentage representation is stored as points out of 100. Do not automatically divide it by 100."
+      },
+      {
+        "id": "part-2",
+        "title": "Choose actions from evidence",
+        "questions": "Q3–Q4 · 25 points",
+        "cells": [
+          7,
+          11
+        ],
+        "lessons": [
+          "4.4",
+          "4.10",
+          "4.11",
+          "2.4"
+        ],
+        "pages": "Week 3: repeated records, PDF pp. 16–20",
+        "connection": "The lecture distinguishes copies, corrections and repeated events. The evidence packet supports removing R13, retaining R14 over R02, and flagging an invalid age value.",
+        "task": "Write your decision plan and predict counts before running. Compare flag_value with drop_student, then restore the final policy.",
+        "evidence": "Cite record IDs, source verification, final row and missing-score counts, and which usable score is lost under row deletion.",
+        "trap": "Newer is not automatically authoritative. A weekly table would need a different key and retain distinct weeks."
+      },
+      {
+        "id": "part-3",
+        "title": "Who answered the survey?",
+        "questions": "Q5–Q6 · 20 points",
+        "cells": [
+          12,
+          16
+        ],
+        "lessons": [
+          "4.5",
+          "4.6",
+          "4.7",
+          "2.6"
+        ],
+        "pages": "Week 3: missingness and response mechanisms, PDF pp. 23–39",
+        "connection": "The lecture connects nonresponse with representation. The survey separates group invitation shares from reply shares and asks what MCAR/MAR/MNAR mean.",
+        "task": "Predict representation, calculate group missing fractions, report the observed mean and match the three hypothetical mechanisms.",
+        "evidence": "Use your actual reply counts and denominators. For MAR given group, explain independence from satisfaction within each group.",
+        "trap": "Different observed response rates do not prove MAR. The survey is separate from the entry-score registry."
+      },
+      {
+        "id": "part-4",
+        "title": "Missing-value choices and sensitivity",
+        "questions": "Q7a–Q7b · 15 points",
+        "cells": [
+          17,
+          19
+        ],
+        "lessons": [
+          "4.8",
+          "4.9",
+          "3.3"
+        ],
+        "pages": "Week 3: missing-data responses and sensitivity, PDF pp. 23–39",
+        "connection": "The lecture separates recovered observations from assumed replacements. The mean-fill demonstration and sensitivity table show different consequences of assumptions.",
+        "task": "Complete the four-response table. Compare mean, SD and observed count before/after filling, then interpret the target decision under alternative missing means.",
+        "evidence": "Quote two sensitivity rows with different decisions, the smallest/largest all-student means and the unchanged number of genuinely observed answers.",
+        "trap": "The demonstration does not fill your final registry. A sensitivity scenario is not a recovered response."
+      },
+      {
+        "id": "part-5",
+        "title": "Flags, validity and who is counted",
+        "questions": "Q8 · 10 points",
+        "cells": [
+          20,
+          22
+        ],
+        "lessons": [
+          "3.6",
+          "4.10",
+          "7.2"
+        ],
+        "pages": "Week 3: unusual values, PDF pp. 40–44",
+        "connection": "An IQR flag describes unusualness, while the dictionary and source establish different evidence. Deleting verified older students changes the population behind a rate.",
+        "task": "Compare age 220 with the verified older age, then interpret the separate withdrawal example before and after excluding older students.",
+        "evidence": "Use review limits and verification, then quote both withdrawal rates with their counts and denominators.",
+        "trap": "Lowering a reported rate by excluding valid students does not improve their underlying outcomes."
+      },
+      {
+        "id": "part-6",
+        "title": "Audit, report and transfer",
+        "questions": "Q9–Q10 · 15 points",
+        "cells": [
+          23,
+          27
+        ],
+        "lessons": [
+          "4.2",
+          "4.11",
+          "2.10",
+          "2.3"
+        ],
+        "pages": "Week 3: assertions, logs and reporting, PDF pp. 46–55",
+        "connection": "The lecture's audit trail becomes a final report. Structural checks verify stated rules, while source accuracy and broader claims still need separate evidence.",
+        "task": "Run final checks. Write the 100–150 word report and 60–100 word answer to your generated challenge, using your own version.",
+        "evidence": "Include row counts, mean in points, valid n, missing count, two log entries, and separate missingness/accuracy limitations.",
+        "trap": "All checks passing does not prove every score matches the actual exam. Use the displayed seed-dependent challenge, not a different student's case."
+      }
     ]
   }
 ]

@@ -25,7 +25,7 @@ for(const l of C.lessons){
  assert.equal(new Set(l.quiz.map(q=>q.prompt)).size,6,l.id+' duplicate question');
  location.hash='#lesson/'+l.id;run('render()');
  const html=element('#main').innerHTML;
- for(const section of (l.module===6?['topic-quiz','written-practice']:['lesson-idea','lesson-steps','lesson-example','topic-quiz','written-practice','full-notes']))assert(html.includes('id="'+section+'"'));
+ for(const section of (l.module===6?['topic-quiz','written-practice']:['topic-quiz','written-practice','full-notes']))assert(html.includes('id="'+section+'"'));
  assert.equal((html.match(/data-practice-id=/g)||[]).length,2);
  assert(html.includes('QUESTION 6 OF 6'));assert(html.includes('QUESTION 8 OF 8'));
 }
@@ -67,7 +67,7 @@ for(let i=0;i<6;i++)element(`input[name="quiz-${i}"]:checked`).value=String(C.le
 element('input[name="quiz-5"]:checked').value=String((C.lessons[2].quiz[5].answer+1)%3);
 click('check-quiz','2.3');assert.equal(run('state.quizzes["2.3"].score'),5);
 click('complete','2.3');assert.equal(run('state.completed.includes("2.3")'),false);
-assert(run('revision()').includes('Describe, compare, predict'));
+assert(run('revision()').includes('The claim ladder'));
 // Written practice persists, is escaped on display, and is included in valid backups.
 handlers.input({target:{id:'practice-0',dataset:{practiceId:'2.1-write-0'},value:'My answer <script>unsafe</script>'}});
 assert.equal(run('state.practice["2.1-write-0"]'),'My answer <script>unsafe</script>');
@@ -129,3 +129,9 @@ location.hash='#lab/4/part-1';run('render()');
 handlers.change({target:{name:'quiz-0',value:'1',dataset:{}}});assert.equal(run('quizDraft["6.1"].answers[0]'),1);
 assert(run('validImported({...state,completed:["6.1"],notes:{"6.1":"Existing lab notes"}})'));
 console.log('PASS: Lab 4 moved into five lab sections; lecture path excludes it; old links, practice and progress preserved.');
+
+for(const l of C.lessons)assert.equal(l.title,l.originalTitle);
+assert.equal(C.modules.find(m=>m.id===4).title,'Data Cleaning and Quality');
+assert(run('lesson("4.1")').includes('<section id="full-notes">'));
+assert(!run('lesson("4.1")').includes('Key words, in plain language'));
+console.log('PASS: lecture terminology restored; detailed notes visible; practice and lab structure retained.');
