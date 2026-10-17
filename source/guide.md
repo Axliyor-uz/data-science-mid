@@ -7,7 +7,9 @@ Prepared for understanding, calculation, code interpretation and defensible writ
 
 **What is covered:** the five lecture decks, Lab 1, Lab 2, and the Week 4 lab instructions. The six PDFs contain 279 pages. The two notebooks contain 57 cells. Your earlier Week 3 lab discussion supplies additional practice context, clearly distinguished from the newly uploaded files.
 
-**What is not supplied:** the course CSV datasets, your personalised lab ID/seed/output, the Week 3 notebook file, a separate Week 5 lab, the textbook chapters, later lecture decks, or an official exam paper. Course-wide example figures below are reported by the slides; personalised results must come from your own run. The fixed Week 4 lab calculations were independently recomputed.
+**Lab update:** the latest Lab 1, Lab 2 and Lab 3 notebooks are available in Lab work, with section-by-section lecture links.
+
+**What is not supplied:** the course CSV datasets, your personalised lab ID/seed/output, a separate Week 5 lab, the textbook chapters, later lecture decks, or an official exam paper. Course-wide example figures below are reported by the slides; personalised results must come from your own run. The fixed Week 4 lab calculations were independently recomputed.
 
 **How to use this guide:** first read the roadmap and answer method; then study Weeks 1-5 in order. Attempt the practice exam before reading its answer key. Use the final checklist to decide what to revise.
 

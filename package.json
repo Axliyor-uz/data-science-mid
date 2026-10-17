@@ -1,9 +1,9 @@
 {
   "name": "data-science-study-studio",
-  "version": "1.0.0",
+  "version": "4.0.0",
   "private": true,
   "type": "module",
-  "description": "58 lessons, 116 practice questions and a 100-mark mock for Data Science Weeks 1\u20135",
+  "description": "53 lecture lessons, 4 connected labs, 464 practice questions and a 100-mark mock",
   "scripts": {
     "test": "node verify.mjs",
     "compile": "node compile.mjs"

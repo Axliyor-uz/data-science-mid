@@ -1,6 +1,6 @@
 # Data Science Study Studio — Vercel-ready website
 
-A complete learning website containing 58 lessons, 116 topic-practice questions,
+A complete learning website containing 53 lecture lessons and 4 labs, 464 topic-practice questions (348 automatically marked and 116 written),
 worked examples, downloadable course materials, revision notes and bookmarks,
 and a timed 100-mark practice final for the supplied Weeks 1–5 materials.
 
@@ -53,7 +53,9 @@ not been deployed to Vercel.
 - `vercel.json`: deployment settings.
 - `source/guide.md`: editable lesson source.
 - `source/files.json`: original source filenames.
-- `questions.txt`: editable question bank.
+- `questions.txt`: original marked question bank.
+- `extra-questions.txt`: 232 additional marked questions with explanations.
+- `simple-lessons.txt`: simpler lesson text and 116 written self-check questions.
 - `compile.mjs`: optional content regeneration script.
 - `verify.mjs`: automated content and interaction-logic checks.
 
@@ -77,7 +79,7 @@ public` is an alternative. Stop the server with Ctrl+C.
 ## Editing
 
 Edit `public/styles.css` for appearance and `public/app.js` for behaviour.
-For lesson text and question edits:
+For full lecture notes, edit `source/guide.md`. For simpler lesson text and written practice, edit `simple-lessons.txt`. For marked questions, edit `questions.txt` and `extra-questions.txt`. Then run:
 
 ```sh
 npm install
@@ -108,6 +110,10 @@ cross-device synchronisation. Export backups before clearing browser storage.
 The app itself has no login; visitor access is controlled by your Vercel project
 settings. The download links serve the bundled course materials to site visitors.
 
+## Updated learning structure
+
+Every lesson now has a simple main idea, explained key words, three steps, a worked example, a common mistake, and one sentence to remember. Full lecture notes remain in an expandable section. Practice has six marked questions and two written questions with model answers. Saved progress from the earlier two-question version can still be imported; your notes and completed lessons are retained.
+
 ## Assessment scope
 
 The mock contains 58 objective questions, one from each lesson's practice bank,
@@ -122,3 +128,16 @@ paper or a guarantee of marks. Later-week materials were not supplied.
 - https://vercel.com/docs/builds/configure-a-build
 - https://vercel.com/docs/project-configuration/vercel-json
 - https://vercel.com/docs/cli/deploy
+
+
+Lab update: the latest Lab 1–3 notebooks are included in public/labs. The Lab work page has 25 guided sections across Labs 1–4 linked to lectures, full questions and read-only code, downloads, local notes and a reviewed checklist. Run notebooks in Colab/Jupyter. Lab 1 CSV dependencies are not bundled. Saved outputs are cleared and Lab 3 identity fields are reset to placeholders.
+
+
+Lab update: the latest Lab 1–3 notebooks are included in public/labs. The Lab work page has 25 guided sections across Labs 1–4 linked to lectures, full questions and read-only code, downloads, local notes and a reviewed checklist. Run notebooks in Colab/Jupyter. Lab 1 CSV dependencies are not bundled. Saved outputs are cleared and Lab 3 identity fields are reset to placeholders.
+
+
+## Latest update: Lab 4 moved into Lab work
+
+Lab 4 now appears at #lab/4 with five guided sections and connections to Week 4 lectures. It is removed from lecture rows. Old module/lesson links and saved quiz progress remain compatible. Lab 4 is based on the original PDF; its guided example covers Task 7. The other three labs have downloadable notebooks.
+
+Edit source/labs.json for Labs 1–3 section mappings. Lab 4 is assembled from the chapter-6 topics in compile.mjs. After changing lesson sources or questions, run npm install, npm run compile, then npm test and commit the regenerated public/content.js. For layout and navigation, edit public/app.js and public/styles.css. The ready-to-deploy public folder matches the latest hosted site.
